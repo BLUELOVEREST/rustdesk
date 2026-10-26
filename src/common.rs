@@ -2460,6 +2460,8 @@ pub fn rustdesk_interval(i: Interval) -> ThrottledInterval {
 }
 
 pub fn load_custom_client() {
+    // Facet branding: set before anything reads APP_NAME (config paths, service names, UI).
+    *config::APP_NAME.write().unwrap() = "Facet".to_owned();
     #[cfg(debug_assertions)]
     if let Ok(data) = std::fs::read_to_string("./custom.txt") {
         read_custom_client(data.trim());
